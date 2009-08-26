@@ -20,9 +20,9 @@ count=${#dates[*]}
 diff=1
 while [[ $count > 0 ]] && [[ $diff > 0 ]]
 do
-	count=$(( $count - 1 ))
-	tst=$(date +"%s" -d "${dates[$count]}")
-	diff=$(( $tst - $last_reboot ))
+    count=$(( $count - 1 ))
+    tst=$(date +"%s" -d "${dates[$count]}")
+    diff=$(( $tst - $last_reboot ))
 done
 
 run_kernel=$(sed -r "s/^\[${dates[$count]}\] upgraded $KERNELPKG \(.* -> (.*)\)$/\1/;tx;d;:x" /var/log/pacman.log) 
@@ -34,10 +34,10 @@ echo "Installed: " $(pacman -Q kernel26 | cut -d" " -f2)
 
 if [[ $reboot > 0 ]]
 then
-	echo -n "A new kernel has been installed since the last reboot.  "
+    echo -n "A new kernel has been installed since the last reboot.  "
     echo "Please schedule a reboot."
-	exit 1
+    exit 1
 else
-	exit 0
+    exit 0
 fi
 
