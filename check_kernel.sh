@@ -26,7 +26,7 @@ do
 done
 
 run_kernel=$(sed -r "s/^\[${dates[$count]}\] upgraded $KERNELPKG \(.* -> (.*)\)$/\1/;tx;d;:x" /var/log/pacman.log) 
-kernel_inst=$(date +"%s" --date "$(tac /var/log/pacman.log | sed -r "s/\[(.*)\].*$(echo $KERNELPKG).*/\1/;tx;d;:x;q")")
+kernel_inst=$(date +"%s" --date "$(tac /var/log/pacman.log | sed -r "s/\[(.*)\].*$KERNELPKG.*/\1/;tx;d;:x;q")")
 reboot=$(( $kernel_inst - $last_reboot ))
 
 echo "Running:   " $run_kernel
