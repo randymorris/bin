@@ -4,11 +4,11 @@
 # it has
 #
 # CREATED: 2009-08-10 12:23
-# MODIFIED: 2009-08-25 12:31
+# MODIFIED: 2009-09-03 07:56
 #
  
-IP='$HOME/tmp/current_external_ip'
-TEMP='$HOME/tmp/temp_ip'
+IP=$HOME/tmp/ip/current_external_ip
+TEMP=$HOME/tmp/ip/temp_ip
 EMAIL_LIST=$(< $HOME/.email)
 
 function _save_and_mail {
