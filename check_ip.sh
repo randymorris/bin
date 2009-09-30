@@ -4,19 +4,37 @@
 # it has
 #
 # CREATED: 2009-08-10 12:23
-# MODIFIED: 2009-09-03 07:56
+# MODIFIED: 2009-09-12 11:09
 #
  
 IP=$HOME/tmp/ip/current_external_ip
 TEMP=$HOME/tmp/ip/temp_ip
 EMAIL_LIST=$(< $HOME/.email)
+LOG=$HOME/tmp/ip/error_log
+IP_SERVICE="www.whatismyip.com/automation/n09230945.asp" 
 
 function _save_and_mail {
-    mv $TEMP $IP
+    cp $TEMP $IP
     echo "$HOSTNAME is now at $(< $IP)" | mail -s $(< $IP) $EMAIL_LIST
 }
- 
-wget -q "www.whatismyip.com/automation/n09230945.asp" -O $TEMP
+
+function _get_ip {
+    wget -q $IP_SERVICE -O $TEMP
+    [ "$(file -b $TEMP)" == empty ] && return 0 || return 1
+}
+
+function _log {
+    echo -n $(date) >> $LOG
+    echo "- $1" >> $LOG
+}
+
+while true; do 
+    _get_ip
+    [ $? -eq 1 ] && break
+    _log "$IP_SERVICE returned a zero byte file"
+    sleep 30s
+done
+    
 chmod 600 $TEMP
  
 if [ -f $IP ]; then
