@@ -3,7 +3,7 @@
 # lspt.sh - much simpler version of lspt.py
 #
 # CREATED:  2009-09-03 17:30
-# MODIFIED: 2009-09-03 17:46
+# MODIFIED: 2009-09-09 14:01
 #
 
 error() {
@@ -15,9 +15,14 @@ lsperms(){
         sed -r "s/([^ ]* [^ ]*) (.*)/\1:\2/"
 }
 
-[ -a $1 ] || error "$1 does not exist"
+arg=$1
 
-[ -d $1 ] && cd $1 || cd $(dirname $1)
+if [ -z $arg ]; then
+    arg=$PWD
+fi
+
+[ -a $arg ] || error "$arg does not exist"
+[ -d $arg ] && cd $arg || cd $(dirname $arg)
 
 startdir=$PWD
 
@@ -28,4 +33,6 @@ while [ $PWD != $startdir ]; do
     popd &> /dev/null
 done
 
-[ -f $(basename $1) ] && lsperms ${PWD}$(basename $1)
+lsperms $PWD
+
+[ -f $(basename $arg) ] && lsperms ${PWD}/$(basename $arg) || exit 0
