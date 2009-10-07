@@ -4,7 +4,7 @@
 # it has
 #
 # CREATED: 2009-08-10 12:23
-# MODIFIED: 2009-09-12 11:09
+# MODIFIED: 2009-10-06 08:07
 #
  
 IP=$HOME/tmp/ip/current_external_ip
@@ -25,7 +25,7 @@ function _get_ip {
 
 function _log {
     echo -n $(date) >> $LOG
-    echo "- $1" >> $LOG
+    echo " - $1" >> $LOG
 }
 
 while true; do 
