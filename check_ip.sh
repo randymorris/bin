@@ -4,7 +4,7 @@
 # it has
 #
 # CREATED: 2009-08-10 12:23
-# MODIFIED: 2009-10-06 08:07
+# MODIFIED: 2009-10-21 20:44
 #
  
 IP=$HOME/tmp/ip/current_external_ip
@@ -20,7 +20,8 @@ function _save_and_mail {
 
 function _get_ip {
     wget -q $IP_SERVICE -O $TEMP
-    [ "$(file -b $TEMP)" == empty ] && return 0 || return 1
+    [ "$(file -b $TEMP)" == empty ]
+    return $?
 }
 
 function _log {
