@@ -4,7 +4,8 @@
 #                   reboot if so, exit with a message and exit status of 1 else
 #                   exit with exit status 0
 #
-# CREATED:  A long time ago MODIFIED: 2009-08-19 20:44
+# CREATED:  A long time ago 
+# MODIFIED: 2009-11-04 10:27
 
 KERNELPKG="kernel26"
 
