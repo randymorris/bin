@@ -4,9 +4,9 @@
 # it has
 #
 # CREATED: 2009-08-10 12:23
-# MODIFIED: 2009-12-29 12:44
+# MODIFIED: 2010-04-22 17:20
 #
- 
+
 IP=$HOME/tmp/ip/current_external_ip
 TEMP=$HOME/tmp/ip/temp_ip
 EMAIL_LIST=$(< $HOME/.email)
@@ -36,9 +36,9 @@ while true; do
     _log "$IP_SERVICE returned a zero byte file"
     sleep 30s
 done
-    
+
 chmod 600 $TEMP
- 
+
 if [ -f $IP ]; then
     diff $TEMP $IP &> /dev/null || _save_and_mail
 else
