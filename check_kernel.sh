@@ -5,7 +5,7 @@
 #                   exit with exit status 0
 #
 # CREATED:  A long time ago 
-# MODIFIED: 2009-11-04 10:27
+# MODIFIED: 2010-11-10 12:44
 
 KERNELPKG="kernel26"
 
@@ -18,12 +18,12 @@ dates=( $dates_inst )
 unset IFS
 
 count=${#dates[*]}
-diff=1
-while [[ $count > 0 ]] && [[ $diff > 0 ]]
+date_diff=1
+while [[ $count -gt 0 ]] && [[ $date_diff -gt 0 ]]
 do
     count=$(( $count - 1 ))
-    tst=$(date +"%s" -d "${dates[$count]}")
-    diff=$(( $tst - $last_reboot ))
+    last_inst=$(date +"%s" -d "${dates[$count]}")
+    date_diff=$(( $last_inst - $last_reboot ))
 done
 
 run_kernel=$(sed -r "s/^\[${dates[$count]}\] upgraded $KERNELPKG \(.* -> (.*)\)$/\1/;tx;d;:x" /var/log/pacman.log) 
